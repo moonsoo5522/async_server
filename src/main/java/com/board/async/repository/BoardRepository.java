@@ -9,5 +9,4 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface BoardRepository extends ReactiveMongoRepository<Board, String> {
-    Flux<Board> findByName(String name);
 }

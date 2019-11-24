@@ -1,11 +1,13 @@
 package com.board.async.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "board")
+@Document(collection = "member")
 public class Board {
+    @Id
+    private String id;
     private String name;
-    private String author;
 
     public String getName() {
         return name;
@@ -15,11 +17,11 @@ public class Board {
         this.name = name;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getId() {
+        return id;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setId(String id) {
+        this.id = id;
     }
 }

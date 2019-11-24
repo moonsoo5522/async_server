@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.SimpleReactiveMongoDatabaseFactory;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
+import org.springframework.web.client.RestTemplate;
 
 @EnableReactiveMongoRepositories(basePackages = "com.board.async.repository")
 @SpringBootApplication
@@ -21,12 +22,17 @@ public class AsyncApplication {
 
     @Bean
     public SimpleReactiveMongoDatabaseFactory boardFactory(MongoClient mongoClient) {
-        return new SimpleReactiveMongoDatabaseFactory(mongoClient, "board");
+        return new SimpleReactiveMongoDatabaseFactory(mongoClient, "test");
     }
 
     @Bean
     public ReactiveMongoTemplate reactiveMongoTemplate(@Qualifier("boardFactory") ReactiveMongoDatabaseFactory reactiveMongoDatabaseFactory, MongoConverter converter) {
         return new ReactiveMongoTemplate(reactiveMongoDatabaseFactory, converter);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
 }
