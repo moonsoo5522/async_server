@@ -61,8 +61,8 @@ public class AsyncApplicationTests {
         }
 
         System.out.println("request start! ");
-        for(int i=0; i<5; i++) {
-            Mono<ClientResponse> response = WebClient.create("http://localhost:7000/test").get().exchange().log();
+        for(int i=0; i<10; i++) {
+            Mono<ClientResponse> response = WebClient.create("http://localhost:7000/ping").get().exchange();
             response.subscribe((data) -> {
                 System.out.println("resonse code " + data.rawStatusCode());
             });

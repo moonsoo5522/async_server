@@ -1,5 +1,6 @@
 package com.board.async.handler;
 
+import com.board.async.annotation.AuthRequired;
 import com.board.async.model.Board;
 import com.board.async.model.Member;
 import com.board.async.repository.BoardRepository;
@@ -10,6 +11,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.HashMap;
 
@@ -35,5 +37,13 @@ public class HomeHandler {
 
         }
         return ServerResponse.ok().body(Mono.just("ok"), String.class);
+    }
+
+    @AuthRequired
+    public Mono<ServerResponse> ping(ServerRequest request) {
+        String ltoken = (String) request.attribute("ltoken").orElse("");
+        System.out.println("outer : " + Thread.currentThread().getName());
+        return ServerResponse.ok().body(Mono.just("hello")
+                .publishOn(Schedulers.newElastic("pub")).log(), String.class);
     }
 }

@@ -1,5 +1,6 @@
 package com.board.async.service;
 
+import com.board.async.model.Member;
 import com.board.async.model.token.DeviceLogin;
 import com.board.async.model.token.LoginToken;
 import com.board.async.model.token.TokenPayload;

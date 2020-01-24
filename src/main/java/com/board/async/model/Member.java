@@ -18,9 +18,17 @@ public class Member {
 
     @Column(name = "device_id")
     private String deviceId;
+
+    @Column(name = "gender")
     private String gender;
+
+    @Column(name = "nation_cd")
     private String nationCd;
+
+    @Column(name = "age_range")
     private int ageRange;
+
+    @Column(name = "reg_dt")
     private String regDt;
 
     @Override

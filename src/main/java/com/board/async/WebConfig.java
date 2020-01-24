@@ -10,8 +10,7 @@ import org.springframework.web.reactive.config.DelegatingWebFluxConfiguration;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.function.server.RouterFunction;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
+import static org.springframework.http.MediaType.*;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -20,7 +19,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class WebConfig extends DelegatingWebFluxConfiguration {
 
     @Autowired
-    HomeHandler homeHandler;
+    private HomeHandler homeHandler;
 
     @Autowired
     private MemberHandler memberHandler;
@@ -28,7 +27,8 @@ public class WebConfig extends DelegatingWebFluxConfiguration {
     @Bean
     public RouterFunction<?> homeRouter() {
         return route(GET("/").and(accept(APPLICATION_JSON)), homeHandler::hello)
-                .andRoute(GET("/test").and(accept(APPLICATION_JSON)), homeHandler::test);
+                .andRoute(GET("/test").and(accept(APPLICATION_JSON)), homeHandler::test)
+                .andRoute(GET("/ping").and(accept(TEXT_PLAIN)), homeHandler::ping);
     }
 
     @Bean
