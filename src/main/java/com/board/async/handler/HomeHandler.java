@@ -26,7 +26,7 @@ public class HomeHandler {
 
     public Mono<ServerResponse> hello(ServerRequest request) {
         return ServerResponse.ok()
-                  .body(memberRepository.findByDeviceId("hello"), Member.class);
+                  .body(Mono.just(memberRepository.findByDeviceId("hello")), Member.class);
     }
 
     public Mono<ServerResponse> test(ServerRequest request) {
