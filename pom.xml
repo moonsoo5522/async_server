@@ -109,6 +109,7 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
+                    <noCache>true</noCache>
                 </configuration>
             </plugin>
         </plugins>
