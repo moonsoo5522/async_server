@@ -3,9 +3,8 @@ package com.board.async.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 
 @Getter
@@ -13,8 +12,9 @@ import javax.persistence.Id;
 @Entity(name = "member")
 public class Member {
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "mem_no")
-    private long memNo;
+    private Long memNo;
 
     @Column(name = "device_id")
     private String deviceId;
@@ -29,7 +29,7 @@ public class Member {
     private int ageRange;
 
     @Column(name = "reg_dt")
-    private String regDt;
+    private Date regDt;
 
     @Override
     public String toString() {

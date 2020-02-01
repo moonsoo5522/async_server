@@ -42,7 +42,11 @@ public class HomeHandler {
     public Mono<ServerResponse> ping(ServerRequest request) {
         String ltoken = (String) request.attribute("ltoken").orElse("");
         System.out.println("outer : " + Thread.currentThread().getName());
-        return ServerResponse.ok().body(Mono.just("hello")
-                .publishOn(Schedulers.newElastic("pub")).log(), String.class);
+        return ServerResponse.ok().body(Mono.fromCallable(() -> "hello")
+                .subscribeOn(Schedulers.elastic()), String.class);
+    }
+
+    public Mono<ServerResponse> l7check(ServerRequest request) {
+        return ServerResponse.ok().body(Mono.just("pong"), String.class);
     }
 }

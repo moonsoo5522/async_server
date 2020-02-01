@@ -28,13 +28,17 @@ public class WebConfig extends DelegatingWebFluxConfiguration {
     public RouterFunction<?> homeRouter() {
         return route(GET("/").and(accept(APPLICATION_JSON)), homeHandler::hello)
                 .andRoute(GET("/test").and(accept(APPLICATION_JSON)), homeHandler::test)
-                .andRoute(GET("/ping").and(accept(TEXT_PLAIN)), homeHandler::ping);
+                .andRoute(GET("/ping").and(accept(TEXT_PLAIN)), homeHandler::ping)
+                .andRoute(GET("/l7check").and(accept(TEXT_PLAIN)), homeHandler::l7check);
     }
 
     @Bean
     public RouterFunction<?> memberRouter() {
         return route(POST("/login")
                     .and(accept(APPLICATION_JSON_UTF8))
-                    .and(contentType(APPLICATION_JSON_UTF8)), memberHandler::login);
+                    .and(contentType(APPLICATION_JSON_UTF8)), memberHandler::login)
+                .andRoute(POST("/join")
+                    .and(accept(APPLICATION_JSON))
+                    .and(contentType(APPLICATION_JSON_UTF8)), memberHandler::join);
     }
 }
